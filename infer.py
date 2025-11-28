@@ -7,7 +7,7 @@ import requests
 question = "Mike Barnett negotiated many contracts including which player that went on to become general manager of CSKA Moscow of the Kontinental Hockey League?"
 
 # Model ID and device setup
-model_id = "PeterJinGo/SearchR1-nq_hotpotqa_train-qwen2.5-7b-em-ppo"
+model_id = "PeterJinGo/SearchR1-nq_hotpotqa_train-qwen2.5-3b-em-grpo"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 question = question.strip()
@@ -26,6 +26,7 @@ If you find no further external knowledge needed, you can directly provide the a
 # Initialize the tokenizer and model
 tokenizer = transformers.AutoTokenizer.from_pretrained(model_id)
 model = transformers.AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.bfloat16, device_map="auto")
+# curr_eos = [tokenizer.eos_token_id]
 
 # Define the custom stopping criterion
 class StopOnSequence(transformers.StoppingCriteria):
